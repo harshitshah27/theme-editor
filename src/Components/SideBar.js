@@ -10,8 +10,11 @@ import {
   AccordionDetails,
   AccordionSummary,
   Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
 } from "@material-ui/core";
-
 import MenuIcon from "@material-ui/icons/MenuOutlined";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PhotoCard from "Components/PhotoCard";
@@ -35,9 +38,14 @@ export default function TemporaryDrawer() {
   const [openDrawer, setopenDrawer] = useState(false);
   const [primaryColor, setPrimaryColor] = useState("#000000");
   const [secondaryColor, setSecondaryColor] = useState("#808080");
+  const [font, setFont] = useState("Arial");
 
   const toggleDrawer = () => {
     setopenDrawer(!openDrawer);
+  };
+
+  const handleFontChange = (e) => {
+    setFont(e.target.value);
   };
 
   const list = () => (
@@ -98,22 +106,21 @@ export default function TemporaryDrawer() {
             <Typography className={classes.heading}>Fonts</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <ColorPicker
-              setColor={setSecondaryColor}
-              buttonTitle="Secondary Color"
-            />
-            <div
-              style={{ paddingLeft: 38, display: "flex", alignItems: "center" }}
-            >
-              <div
-                style={{
-                  background: secondaryColor,
-                  height: 20,
-                  width: 20,
-                  borderRadius: 10,
-                }}
-              />
-            </div>
+            <FormControl variant="filled" fullWidth>
+              <InputLabel>Select font type</InputLabel>
+              <Select onChange={handleFontChange} value={font}>
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value="Roboto">Roboto</MenuItem>
+                <MenuItem value="Arial">Arial</MenuItem>
+
+                <MenuItem value="Times New Roman">Times New Roman</MenuItem>
+                <MenuItem value="Times">Times</MenuItem>
+                <MenuItem value="serif">Serif</MenuItem>
+                <MenuItem value="sans-serif">Sans-Serif</MenuItem>
+              </Select>
+            </FormControl>
           </AccordionDetails>
         </Accordion>
       </div>
@@ -154,6 +161,7 @@ export default function TemporaryDrawer() {
           <PhotoCard
             primaryColor={primaryColor}
             secondaryColor={secondaryColor}
+            font={font}
           />
         </Grid>
         <Grid item>
