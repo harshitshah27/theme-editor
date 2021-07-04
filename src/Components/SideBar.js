@@ -46,6 +46,7 @@ export default function TemporaryDrawer() {
   const [secondaryColor, setSecondaryColor] = useState("#808080");
   const [font, setFont] = useState("Arial");
   const [openNotification, setopenNotification] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const toggleDrawer = () => {
     setopenDrawer(!openDrawer);
@@ -56,6 +57,7 @@ export default function TemporaryDrawer() {
   };
 
   const handleSave = async () => {
+    setloading(true);
     const data = {
       color: {
         primary: primaryColor,
@@ -71,8 +73,11 @@ export default function TemporaryDrawer() {
       if (response.status === 200) {
         setopenDrawer(false);
         setopenNotification(true);
+        setloading(false);
       }
-    } catch (e) {}
+    } catch (e) {
+      setloading(false);
+    }
   };
 
   const handleUndo = () => {
@@ -174,7 +179,7 @@ export default function TemporaryDrawer() {
               fullWidth
               onClick={handleSave}
             >
-              Save
+              {loading ? `Saving...` : `Save`}
             </Button>
           </Grid>
         </Grid>
