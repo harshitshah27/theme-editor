@@ -27,7 +27,7 @@ function ColorPicker(props) {
 
   return (
     <div>
-      <Button onClick={handleClick} variant="text">
+      <Button onClick={handleClick} variant="contained">
         {buttonTitle}
       </Button>
       {openColorPicker ? (
