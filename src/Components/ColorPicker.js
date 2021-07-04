@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CompactPicker } from "react-color";
+import { Button } from "@material-ui/core";
 
 const popover = {
   position: "absolute",
@@ -26,7 +27,9 @@ function ColorPicker(props) {
 
   return (
     <div>
-      <button onClick={handleClick}>{buttonTitle}</button>
+      <Button onClick={handleClick} variant="text">
+        {buttonTitle}
+      </Button>
       {openColorPicker ? (
         <div style={popover}>
           <div style={cover} onClick={handleClose} />

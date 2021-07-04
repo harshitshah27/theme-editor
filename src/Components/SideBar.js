@@ -33,8 +33,8 @@ const useStyles = makeStyles({
 export default function TemporaryDrawer() {
   const classes = useStyles();
   const [openDrawer, setopenDrawer] = useState(false);
-  const [primaryColor, setPrimaryColor] = useState("");
-  const [secondaryColor, setSecondaryColor] = useState("");
+  const [primaryColor, setPrimaryColor] = useState("#000000");
+  const [secondaryColor, setSecondaryColor] = useState("#808080");
 
   const toggleDrawer = () => {
     setopenDrawer(!openDrawer);
@@ -57,7 +57,9 @@ export default function TemporaryDrawer() {
               setColor={setPrimaryColor}
               buttonTitle="Primary Color"
             />
-            <div style={{ paddingLeft: 38 }}>
+            <div
+              style={{ paddingLeft: 63, display: "flex", alignItems: "center" }}
+            >
               <div
                 style={{
                   background: primaryColor,
@@ -73,7 +75,9 @@ export default function TemporaryDrawer() {
               setColor={setSecondaryColor}
               buttonTitle="Secondary Color"
             />
-            <div style={{ paddingLeft: 20 }}>
+            <div
+              style={{ paddingLeft: 38, display: "flex", alignItems: "center" }}
+            >
               <div
                 style={{
                   background: secondaryColor,
