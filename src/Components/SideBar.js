@@ -165,7 +165,11 @@ export default function TemporaryDrawer() {
           />
         </Grid>
         <Grid item>
-          <LicenseCard />
+          <LicenseCard
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+            font={font}
+          />
         </Grid>
       </Grid>
     </>

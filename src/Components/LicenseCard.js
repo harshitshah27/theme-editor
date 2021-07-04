@@ -9,20 +9,27 @@ const useStyles = makeStyles({
     width: 400,
   },
   title: {
-    color: "black",
+    color: (props) => props.primaryColor,
     fontWeight: "bold",
     fontSize: "24px",
+    fontFamily: (props) => props.font,
   },
   imageContainer: {
     height: 150,
   },
   subText: {
     paddingTop: 20,
+    color: (props) => props.secondaryColor,
+    fontFamily: (props) => props.font,
+  },
+  subtitle: {
+    color: (props) => props.secondaryColor,
+    fontFamily: (props) => props.font,
   },
 });
 
-export default function PhotoCard() {
-  const classes = useStyles();
+export default function PhotoCard(props) {
+  const classes = useStyles(props);
 
   return (
     <Card className={classes.root}>
@@ -30,7 +37,7 @@ export default function PhotoCard() {
         <Typography className={classes.title} gutterBottom>
           Driver License
         </Typography>
-        <Typography color="textSecondary" gutterBottom>
+        <Typography className={classes.subtitle} gutterBottom>
           Take a clear photo of the back of your license
         </Typography>
         <Grid
@@ -54,11 +61,7 @@ export default function PhotoCard() {
           </Grid>
         </Grid>
 
-        <Typography
-          color="textSecondary"
-          gutterBottom
-          className={classes.subText}
-        >
+        <Typography gutterBottom className={classes.subText}>
           Alternatively,continue on your phone via{" "}
           <span style={{ color: "blue" }}>text message</span> or {""}
           <span style={{ color: "blue" }}>email</span>
