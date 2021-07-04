@@ -2,27 +2,25 @@ import React, { useState } from "react";
 import {
   makeStyles,
   AppBar,
-  List,
   Toolbar,
   IconButton,
   SwipeableDrawer,
-  Collapse,
   Grid,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
 } from "@material-ui/core";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+
 import MenuIcon from "@material-ui/icons/MenuOutlined";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PhotoCard from "Components/PhotoCard";
 import LicenseCard from "Components/LicenseCard";
+import ColorPicker from "Components/ColorPicker";
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 300,
   },
   fullList: {
     width: "auto",
@@ -35,7 +33,8 @@ const useStyles = makeStyles({
 export default function TemporaryDrawer() {
   const classes = useStyles();
   const [openDrawer, setopenDrawer] = useState(false);
-  const [open, setopen] = useState(false);
+  const [primaryColor, setPrimaryColor] = useState("");
+  const [secondaryColor, setSecondaryColor] = useState("");
 
   const toggleDrawer = () => {
     setopenDrawer(!openDrawer);
@@ -43,45 +42,46 @@ export default function TemporaryDrawer() {
 
   const list = () => (
     <div className={classes.list}>
-      <List>
-        <ListItem button onClick={() => setopen(!open)}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Color" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Primary Color" />
-            </ListItem>
-          </List>
-        </Collapse>
-        <ListItem button onClick={() => setopen(!open)}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Fonts" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Primary Color" />
-            </ListItem>
-          </List>
-        </Collapse>
-      </List>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>Color</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <ColorPicker setColor={setPrimaryColor} buttonTitle="Primary Color" />
+          <div style={{ paddingLeft: 38 }}>
+            <div
+              style={{
+                background: primaryColor,
+                height: 20,
+                width: 20,
+                borderRadius: 10,
+              }}
+            />
+          </div>
+        </AccordionDetails>
+        <AccordionDetails>
+          <ColorPicker
+            setColor={setSecondaryColor}
+            buttonTitle="Secondary Color"
+          />
+          <div style={{ paddingLeft: 20 }}>
+            <div
+              style={{
+                background: secondaryColor,
+                height: 20,
+                width: 20,
+                borderRadius: 10,
+              }}
+            />
+          </div>
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
-
   return (
     <>
       <AppBar position="static" color="transparent">
