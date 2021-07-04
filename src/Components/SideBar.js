@@ -18,6 +18,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
 import PhotoCard from "Components/PhotoCard";
+import LicenseCard from "Components/LicenseCard";
 
 const useStyles = makeStyles({
   list: {
@@ -114,6 +115,9 @@ export default function TemporaryDrawer() {
       >
         <Grid item>
           <PhotoCard />
+        </Grid>
+        <Grid item>
+          <LicenseCard />
         </Grid>
       </Grid>
     </>
