@@ -41,46 +41,52 @@ export default function TemporaryDrawer() {
   };
 
   const list = () => (
-    <div className={classes.list}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>Color</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ColorPicker setColor={setPrimaryColor} buttonTitle="Primary Color" />
-          <div style={{ paddingLeft: 38 }}>
-            <div
-              style={{
-                background: primaryColor,
-                height: 20,
-                width: 20,
-                borderRadius: 10,
-              }}
+    <>
+      <h3 style={{ paddingLeft: 10 }}>Theme Editor</h3>
+      <div className={classes.list}>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Color</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ColorPicker
+              setColor={setPrimaryColor}
+              buttonTitle="Primary Color"
             />
-          </div>
-        </AccordionDetails>
-        <AccordionDetails>
-          <ColorPicker
-            setColor={setSecondaryColor}
-            buttonTitle="Secondary Color"
-          />
-          <div style={{ paddingLeft: 20 }}>
-            <div
-              style={{
-                background: secondaryColor,
-                height: 20,
-                width: 20,
-                borderRadius: 10,
-              }}
+            <div style={{ paddingLeft: 38 }}>
+              <div
+                style={{
+                  background: primaryColor,
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                }}
+              />
+            </div>
+          </AccordionDetails>
+          <AccordionDetails>
+            <ColorPicker
+              setColor={setSecondaryColor}
+              buttonTitle="Secondary Color"
             />
-          </div>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+            <div style={{ paddingLeft: 20 }}>
+              <div
+                style={{
+                  background: secondaryColor,
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                }}
+              />
+            </div>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+    </>
   );
   return (
     <>
