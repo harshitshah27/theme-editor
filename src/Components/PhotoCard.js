@@ -9,12 +9,12 @@ const useStyles = makeStyles({
     width: 400,
   },
   title: {
-    color: "black",
+    color: (props) => props.primaryColor,
     fontWeight: "bold",
     fontSize: "24px",
   },
   subTitle: {
-    color: "black",
+    color: (props) => props.primaryColor,
     fontWeight: "bold",
     textAlign: "center",
     paddingTop: 20,
@@ -33,8 +33,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PhotoCard() {
-  const classes = useStyles();
+export default function PhotoCard(props) {
+  const classes = useStyles(props);
 
   return (
     <Card className={classes.root}>
@@ -42,7 +42,7 @@ export default function PhotoCard() {
         <Typography className={classes.title} gutterBottom>
           Upload a photo ID
         </Typography>
-        <Typography color="textSecondary" gutterBottom>
+        <Typography style={{ color: props.secondaryColor }} gutterBottom>
           We require a photo of a government ID to verify your identity.
         </Typography>
         <Typography className={classes.subTitle} gutterBottom>
@@ -60,7 +60,11 @@ export default function PhotoCard() {
                 <ContactMail fontSize="large" color="primary" />
               </div>
             </div>
-            <Typography color="textSecondary" gutterBottom component="p">
+            <Typography
+              style={{ color: props.secondaryColor }}
+              gutterBottom
+              component="p"
+            >
               Driver License
             </Typography>
           </Grid>
@@ -70,7 +74,11 @@ export default function PhotoCard() {
                 <PermIdentity fontSize="large" color="primary" />
               </div>
             </div>
-            <Typography color="textSecondary" gutterBottom component="p">
+            <Typography
+              style={{ color: props.secondaryColor }}
+              gutterBottom
+              component="p"
+            >
               National ID
             </Typography>
           </Grid>
@@ -80,7 +88,11 @@ export default function PhotoCard() {
                 <RecentActors fontSize="large" color="primary" />
               </div>
             </div>
-            <Typography color="textSecondary" gutterBottom component="p">
+            <Typography
+              style={{ color: props.secondaryColor }}
+              gutterBottom
+              component="p"
+            >
               Passport
             </Typography>
           </Grid>

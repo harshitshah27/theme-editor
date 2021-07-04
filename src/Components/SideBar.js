@@ -120,7 +120,10 @@ export default function TemporaryDrawer() {
         className={classes.cardContainer}
       >
         <Grid item>
-          <PhotoCard />
+          <PhotoCard
+            primaryColor={primaryColor}
+            secondaryColor={secondaryColor}
+          />
         </Grid>
         <Grid item>
           <LicenseCard />
