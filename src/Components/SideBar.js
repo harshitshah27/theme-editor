@@ -14,12 +14,16 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  Button,
+  Snackbar,
+  A,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/MenuOutlined";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PhotoCard from "Components/PhotoCard";
 import LicenseCard from "Components/LicenseCard";
 import ColorPicker from "Components/ColorPicker";
+import axios from "axios";
 
 const useStyles = makeStyles({
   list: {
@@ -31,6 +35,9 @@ const useStyles = makeStyles({
   cardContainer: {
     padding: "10px",
   },
+  buttonContainer: {
+    padding: 20,
+  },
 });
 
 export default function TemporaryDrawer() {
@@ -39,6 +46,7 @@ export default function TemporaryDrawer() {
   const [primaryColor, setPrimaryColor] = useState("#000000");
   const [secondaryColor, setSecondaryColor] = useState("#808080");
   const [font, setFont] = useState("Arial");
+  const [openNotification, setopenNotification] = useState(false);
 
   const toggleDrawer = () => {
     setopenDrawer(!openDrawer);
@@ -46,6 +54,31 @@ export default function TemporaryDrawer() {
 
   const handleFontChange = (e) => {
     setFont(e.target.value);
+  };
+
+  const handleSave = async () => {
+    const data = {
+      color: {
+        primary: primaryColor,
+        secondary: secondaryColor,
+      },
+      font: font,
+    };
+
+    const response = await axios.post(
+      `https://e8e67cee3540e96594a791e23ad056d6.m.pipedream.net/`,
+      data
+    );
+    if (response.status === 200) {
+      setopenDrawer(false);
+      setopenNotification(true);
+    }
+  };
+
+  const handleUndo = () => {
+    setPrimaryColor("#000000");
+    setSecondaryColor("#808080");
+    setFont("Arial");
   };
 
   const list = () => (
@@ -123,6 +156,28 @@ export default function TemporaryDrawer() {
             </FormControl>
           </AccordionDetails>
         </Accordion>
+        <Grid
+          container
+          spacing={2}
+          justify="center"
+          className={classes.buttonContainer}
+        >
+          <Grid item xs={6}>
+            <Button variant="contained" fullWidth onClick={handleUndo}>
+              Undo All
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={handleSave}
+            >
+              Save
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     </>
   );
@@ -172,6 +227,18 @@ export default function TemporaryDrawer() {
           />
         </Grid>
       </Grid>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        open={openNotification}
+        onClose={() => setopenNotification(true)}
+        message="Theme saved successfully!"
+        autoHideDuration={2000}
+        action={
+          <Button onClick={() => setopenNotification(false)} color="secondary">
+            Close
+          </Button>
+        }
+      />
     </>
   );
 }
