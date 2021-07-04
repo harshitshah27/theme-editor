@@ -89,6 +89,33 @@ export default function TemporaryDrawer() {
             </div>
           </AccordionDetails>
         </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>Fonts</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ColorPicker
+              setColor={setSecondaryColor}
+              buttonTitle="Secondary Color"
+            />
+            <div
+              style={{ paddingLeft: 38, display: "flex", alignItems: "center" }}
+            >
+              <div
+                style={{
+                  background: secondaryColor,
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                }}
+              />
+            </div>
+          </AccordionDetails>
+        </Accordion>
       </div>
     </>
   );
