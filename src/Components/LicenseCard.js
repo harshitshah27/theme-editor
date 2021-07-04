@@ -16,6 +16,9 @@ const useStyles = makeStyles({
   imageContainer: {
     height: 150,
   },
+  subText: {
+    paddingTop: 20,
+  },
 });
 
 export default function PhotoCard() {
@@ -50,6 +53,16 @@ export default function PhotoCard() {
             </Button>
           </Grid>
         </Grid>
+
+        <Typography
+          color="textSecondary"
+          gutterBottom
+          className={classes.subText}
+        >
+          Alternatively,continue on your phone via{" "}
+          <span style={{ color: "blue" }}>text message</span> or {""}
+          <span style={{ color: "blue" }}>email</span>
+        </Typography>
       </CardContent>
     </Card>
   );
