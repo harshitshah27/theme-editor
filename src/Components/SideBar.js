@@ -16,7 +16,6 @@ import {
   FormControl,
   Button,
   Snackbar,
-  A,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/MenuOutlined";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -64,15 +63,16 @@ export default function TemporaryDrawer() {
       },
       font: font,
     };
-
-    const response = await axios.post(
-      `https://e8e67cee3540e96594a791e23ad056d6.m.pipedream.net/`,
-      data
-    );
-    if (response.status === 200) {
-      setopenDrawer(false);
-      setopenNotification(true);
-    }
+    try {
+      const response = await axios.post(
+        `https://e8e67cee3540e96594a791e23ad056d6.m.pipedream.net/`,
+        data
+      );
+      if (response.status === 200) {
+        setopenDrawer(false);
+        setopenNotification(true);
+      }
+    } catch (e) {}
   };
 
   const handleUndo = () => {
